@@ -1,26 +1,28 @@
-person_min = 2
-person_max = 10
-person_total = 100
-memo = {}
+person_min = 2      # 구분할 수 있는 최소 인원
+person_max = 10     # 구분할 수 있는 최대 인원
+person_total = 100  # 최대 인원
+memo = {}           # 메모화 변수
 
-def problem(remain, sitted):
-    key = str([remain, sitted])
-    # 종료 조건
+# 전체 x명 중 y명씩 앉는 모든 경우의 수를 구하는 함수
+def problem(x, y):
+    key = str([x, y]) # remain명 중에 sitted명이 앉는 경우의 수 메모화
+
     if key in memo:
         return memo[key]
-    if remain < 0:
-        return 0        # 무효하니 0 리턴
-    if remain == 0:
-        return 1        # 유효하니 수를 세면 돼서 1을 리턴
+    if x < 0:
+        return 0
+    if x == 0:
+        return 1
 
-    # 재귀처리
+    # 재귀 처리
     count = 0
-    for i in range(sitted, person_max + 1):
-        count += problem(remain - i, i)
+    for i in range(y, person_max + 1):
+        # i명씩 앉을 때의 모든 경우의 수 구하기
+        count += problem(x - i, i)
 
-    # 메모화 처리
     memo[key] = count
-    # 종료
+
     return count
 
 print(problem(person_total, person_min))
+print(memo)
