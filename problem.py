@@ -9,17 +9,18 @@ def problem(x, y):
 
     if key in memo:
         return memo[key]
-    if x < 0:
+    if x < 0:       # 무효한 값
         return 0
-    if x == 0:
+    if x == 0:      # 마지막으로 앉는 경우의 수
         return 1
 
     # 재귀 처리
     count = 0
     for i in range(y, person_max + 1):
-        # i명씩 앉을 때의 모든 경우의 수 구하기
+        # 최소 y명부터 최대 person_max명까지 i명씩 앉을 때의 모든 경우의 수 구하기
         count += problem(x - i, i)
-
+    
+    # 경우의 수를 이미 계산한 것은 메모화 작업을 수행
     memo[key] = count
 
     return count
