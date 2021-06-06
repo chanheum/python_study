@@ -6,5 +6,8 @@ for i in range(len(array)):
         # 가장 작은 수의 인덱스를 얻어옴
         if array[min_index] > array[j]:
             min_index = j
-
+    # 스와프 수행
     array[i], array[min_index] = array[min_index], array[i]
+    
+    
+print(array)
